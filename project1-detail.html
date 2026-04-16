@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>VisionCortex · 全自动鼻镜详情</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f8fafc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+    }
+    .detail-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+      padding: 2.2rem 2.5rem;
+      border: 1px solid #eef2ff;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #1e40af; text-decoration: underline; }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1.2rem;
+    }
+    .detail-header i {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      background: #eef2ff;
+      padding: 0.8rem;
+      border-radius: 20px;
+    }
+    .detail-header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .detail-badge {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      margin-left: 1rem;
+      font-size: 1rem;
+    }
+    .detail-image {
+      margin: 2rem 0;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    }
+    .detail-image img {
+      width: 100%;
+      display: block;
+    }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.8rem 0;
+    }
+    .tech-tag {
+      background: #eef2ff;
+      color: #1e40af;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 2rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #0f172a;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid #1e293b;
+    }
+    .btn i { font-size: 1.2rem; }
+    .btn:hover { background: #2563eb; border-color: #2563eb; box-shadow: 0 8px 16px -4px #3b82f666; }
+    .btn-outline {
+      background: transparent;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+    }
+    .btn-outline:hover { background: #f8fafc; border-color: #2563eb; color: #2563eb; }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1.2rem;
+      border-left: 6px solid #3b82f6;
+      padding-left: 1.2rem;
+    }
+    .highlight { color: #2563eb; font-weight: 500; }
+    .code-note {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid #3b82f6;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 640px) {
+      .detail-container { padding: 1.5rem; }
+      .detail-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="detail-container">
+  <a href="main.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回项目列表</a>
+  
+  <div class="detail-header">
+    <i class="fas fa-brain"></i>
+    <h1>全自动鼻镜检测与AI初筛系统 <span class="detail-badge">与中山三院合作项目</span></h1>
+  </div>
+  
+  <p style="font-size:1.2rem; color:#334155; margin-bottom:1.2rem;">
+    <i class="fas fa-quote-left" style="color:#2563eb; opacity:0.7;"></i> 
+    基于法奥意威 FR5 协作机器人，挂载内窥镜，完成从体外面部定位到体内腔道跟随的完整自主流程。提供 ROS2 分布式节点与纯 Python 单脚本两种实现，核心算法一致，适配不同部署场景。
+  </p>
+  
+  <div class="detail-image">
+    <img src="https://s41.ax1x.com/2026/04/13/peDCstU.jpg" alt="全自动鼻镜实验场景">
+  </div>
+  
+  <div class="tech-tags">
+    <span class="tech-tag">视觉伺服</span><span class="tech-tag">手眼集成</span><span class="tech-tag">人工势场</span>
+    <span class="tech-tag">ROS2</span><span class="tech-tag">Python</span><span class="tech-tag">MediaPipe</span>
+    <span class="tech-tag">卡尔曼滤波</span><span class="tech-tag">状态机</span><span class="tech-tag">FR5协作机器人</span>
+  </div>
+  
+  <!-- ========== 介绍正文 ========== -->
+  <p style="margin-bottom: 1.5rem;">本项目构建了一套完整的“体外定位—体内导航”视觉伺服系统，机械臂从任意起始位姿出发，首先依靠面部特征将鼻镜末端引导至鼻腔入口，随后进入视野受限的腔道内部，依靠腔内光影变化自主纠偏并抵达目标深度。整个工程兼顾了实时性、鲁棒性与安全性，并在两种架构下得到了验证。</p>
+
+  <div class="code-note">
+    <i class="fas fa-code-branch" style="margin-right: 8px; color:#2563eb;"></i>
+    <strong>双版本实现：</strong> ROS2 版充分利用分布式节点、话题/服务通信与多线程调度，适合多模块协同与数据记录；纯 Python 脚本版剥离框架依赖，单文件即运行，部署极简。两者共享相同的视觉算法、状态机设计与运动控制策略。
+  </div>
+
+  <h2 class="section-title"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 10px; color:#2563eb;"></i>第一阶段：体外视觉定位与逼近</h2>
+  <p>摄像头实时画面经裁剪后送入 MediaPipe 人脸关键点模型。系统通过鼻翼两侧的几何插值动态计算出目标鼻孔的亚像素坐标，并利用鼻翼间距作为天然尺度参考，实时估算像素到物理毫米的转换比例，从而摆脱了对固定标定距离的依赖。</p>
+  <p style="margin-top: 0.8rem;">运动决策由带迟滞阈值的状态机驱动：只有当像素偏差持续超过“进入阈值”才触发 XY 对齐，低于“退出阈值”且稳定多帧后才切换为 Z 轴进近。状态切换期间采用线性插值混合运动指令，使机械臂轨迹平滑过渡。此外，针对 MediaPipe 偶发的点位跳变，系统内置了异常帧过滤器（位移跳变与宽度跳变双重检测），并结合指数滑动平均滤波，确保视觉信号输出稳定。</p>
+  <p style="margin-top: 0.8rem;">在工程实现上，ROS2 版将感知、决策、控制拆分为独立节点，通过话题与动作服务异步交互；纯 Python 版则将所有逻辑封装于单一主循环中，直接调用法奥 SDK 的底层 RPC 接口完成工具坐标系下的偏移移动。二者均包含目标丢失后的等待重试与后退复位机制。</p>
+
+  <h2 class="section-title"><i class="fas fa-route" style="margin-right: 10px; color:#2563eb;"></i>第二阶段：体内受限环境力场导航</h2>
+  <p>工具进入腔口后，视野瞬间变暗且缺乏全局特征。系统首先进入“盲走”阶段：以小步长沿工具 Z 轴开环推进，同时持续监测视野中是否出现稳定的暗区纹理。一旦连续多帧检测到有效目标，即自动切换至视觉闭环控制，巧妙解决了入口处的视觉失效问题。</p>
+  <p style="margin-top: 0.8rem;">闭环导航的核心是基于人工势场（APF）的力场计算。图像经 CLAHE 增强与高斯模糊后，通过百分位阈值分割出暗区（引力源）与亮区（斥力源），实时合成引导工具向画面中心靠拢的合力矢量。为提高信号平滑度，系统对力场分量施加 EMA 滤波，并对目标点位置运行二维卡尔曼滤波器进行轨迹预测，有效抑制了腔内图像噪声引起的抖动。</p>
+  <p style="margin-top: 0.8rem;">力场矢量通过一个非线性转换器映射为机械臂的动作：力的方向决定工具坐标系的旋转方向（Rx/Ry），力的大小则用于动态调整旋转增益与 XY 平移步长——偏离中心越远，动作越果断；越靠近中心，调整越精细。转换器还包含死区阈值、单次最大角度/平移限幅以及每阶段累积量限制，防止过冲。状态机在“旋转对齐”与“直向前进”之间采用滞回切换，过渡期间通过线性插值实现运动指令的淡入淡出，进一步柔化机械臂轨迹。</p>
+  <p style="margin-top: 0.8rem;">在架构层面，ROS2 版将力场转换、卡尔曼滤波、状态机评估分散在节点回调中，并利用多线程执行器实现图像处理与运动控制的并发；纯 Python 版则以紧凑的主循环完成所有计算，并通过线程池异步下发运动指令，同时借助 OpenCV 绘制丰富的调试界面（力场箭头、滤波前后目标点、深度进度条等），使算法内部状态一目了然。</p>
+
+  <h2 class="section-title"><i class="fas fa-shield-hal" style="margin-right: 10px; color:#2563eb;"></i>安全与鲁棒性设计</h2>
+  <ul style="margin-left: 1.8rem; margin-bottom: 1.5rem;">
+    <li><strong>多重滤波链路：</strong> EMA 平滑力场与像素距离，卡尔曼滤波预测目标轨迹，异常帧拒绝剔除跳变野值，共同保证视觉信号可靠。</li>
+    <li><strong>滞回状态机 + 帧计数防抖：</strong> 避免在阈值边界频繁切换状态，防止机械臂震颤。</li>
+    <li><strong>累积量安全限制：</strong> 单阶段旋转角度上限、总深度上限、平移累积上限，防止运动超调或碰撞。</li>
+    <li><strong>错误恢复：</strong> 目标丢失超时后自动后退重试；ROS2 版利用服务重试机制，纯 Python 版内置 SDK 重发逻辑，应对通信抖动。</li>
+  </ul>
+
+  <h2 class="section-title"><i class="fas fa-microchip" style="margin-right: 10px; color:#2563eb;"></i>技术栈摘要</h2>
+  <p><span class="highlight">视觉：</span>OpenCV、MediaPipe、CLAHE、自适应阈值分割。<br>
+  <span class="highlight">滤波与控制：</span>指数滑动平均 (EMA)、二维卡尔曼滤波、人工势场 (APF)、非线性增益映射、线性插值过渡。<br>
+  <span class="highlight">架构：</span>ROS2 (Humble) 节点/话题/服务/多线程执行器；Python 多线程与线程池；法奥机器人 SDK (RPC / ROS2 服务)。<br>
+  <span class="highlight">状态管理：</span>有限状态机 (FSM) 配合迟滞阈值与帧计数防抖。</p>
+
+  <p style="margin-top: 1.5rem; background: #f8fafc; padding: 1.2rem 1.5rem; border-radius: 20px;">
+    <i class="fas fa-check-circle" style="color: #2563eb; margin-right: 8px;"></i>
+    本项目从体外的特征定位到体内的力场跟随，形成了一套可部署、可扩展的视觉伺服解决方案。ROS2 版展现了分布式机器人系统的工程规范，纯 Python 版则凸显了算法内核的鲁棒性与轻量化集成能力。
+  </p>
+
+  <!-- 按钮区 -->
+  <div class="action-buttons">
+    <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub 源码</a>
+    <a href="https://pan.quark.cn/s/baddd4a8b00c" target="_blank" class="btn"><i class="fas fa-play"></i> 观看演示视频</a>
+    <a href="main.html" class="btn btn-outline"><i class="fas fa-home"></i> 返回作品集</a>
+  </div>
+  
+  <p style="margin-top: 2.5rem; font-size:0.9rem; color:#64748b; text-align:center;">
+    <i class="far fa-calendar-alt"></i> 更新于 2026 · 张逸凡
+  </p>
+</div>
+</body>
+</html>

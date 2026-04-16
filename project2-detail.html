@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>DexHand · 智能手套遥操作系统详情</title>
+  <!-- Font Awesome 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- 保持与项目一完全一致的样式风格 ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f8fafc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+    }
+    .detail-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+      padding: 2.2rem 2.5rem;
+      border: 1px solid #eef2ff;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #1e40af; text-decoration: underline; }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1.2rem;
+    }
+    .detail-header i {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      background: #eef2ff;
+      padding: 0.8rem;
+      border-radius: 20px;
+    }
+    .detail-header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .detail-badge {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      margin-left: 1rem;
+      font-size: 1rem;
+    }
+    .detail-image {
+      margin: 2rem 0;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    }
+    .detail-image img {
+      width: 100%;
+      display: block;
+    }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.8rem 0;
+    }
+    .tech-tag {
+      background: #eef2ff;
+      color: #1e40af;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 2rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #0f172a;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid #1e293b;
+    }
+    .btn i { font-size: 1.2rem; }
+    .btn:hover { background: #2563eb; border-color: #2563eb; box-shadow: 0 8px 16px -4px #3b82f666; }
+    .btn-outline {
+      background: transparent;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+    }
+    .btn-outline:hover { background: #f8fafc; border-color: #2563eb; color: #2563eb; }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1.2rem;
+      border-left: 6px solid #3b82f6;
+      padding-left: 1.2rem;
+    }
+    .highlight { color: #2563eb; font-weight: 500; }
+    .code-note {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid #3b82f6;
+      font-size: 0.95rem;
+    }
+    .gesture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .gesture-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 1.2rem;
+      border: 1px solid #e2e8f0;
+    }
+    .gesture-icon {
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .detail-container { padding: 1.5rem; }
+      .detail-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="detail-container">
+  <!-- 返回链接，保持文件名一致 -->
+  <a href="main.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回项目列表</a>
+  
+  <div class="detail-header">
+    <!-- 使用手套 + 触觉反馈的概念图标，更贴合论文主题 -->
+    <i class="fas fa-hand-peace"></i>
+    <h1>智能手套遥操作机器人系统 <span class="detail-badge">人机交互 · 仿生振动反馈</span></h1>
+  </div>
+  
+  <p style="font-size:1.2rem; color:#334155; margin-bottom:1.2rem;">
+    <i class="fas fa-quote-left" style="color:#2563eb; opacity:0.7;"></i> 
+    基于集成了电位器与陀螺仪的数据手套，实时捕捉手部姿态与弯曲度，映射至法奥协作机器人空间运动与步进电机末端工具。系统进一步引入基于Stevens幂律的仿生振动反馈机制，通过感知线性化映射显著增强力控精细度，实现更符合直觉的遥操作。
+  </p>
+  
+  <div class="detail-image">
+    <!-- 替换为实际的系统场景图（目前使用占位图示意） -->
+    <img src="https://s41.ax1x.com/2026/04/13/peDCstU.jpg" alt="智能手套遥操作系统实验场景">
+  </div>
+  
+  <div class="tech-tags">
+    <span class="tech-tag">弯曲传感器</span><span class="tech-tag">手势识别</span><span class="tech-tag">主从控制</span>
+    <span class="tech-tag">PySimpleGUI</span><span class="tech-tag">多线程</span><span class="tech-tag">伺服模式</span>
+    <span class="tech-tag">Stevens幂律</span><span class="tech-tag">振动反馈</span><span class="tech-tag">步进电机</span>
+  </div>
+  
+  <!-- ========== 介绍正文 ========== -->
+  <p style="margin-bottom: 1.5rem;">本项目构建了一套完整的可穿戴式机器人遥操作系统。数据手套通过五个电位器传感器和一个陀螺仪采集手部姿态，经由串口传输至上位机。
+    上位机包含独立的图形界面程序（APP.py）与核心控制逻辑（main.py），两者通过共享内存文件高效交换数据。系统定义了自然手势映射规则：握拳复位、单指/多指组合控制笛卡
+    尔空间运动，食指弯曲度线性控制步进电机工具开合区间。尤为关键的是，末端夹爪集成弹性耦合式力感知模块，并依据Stevens幂律将力信号转换为符合人类主观感受的振动强度，
+    以极低成本实现了仿生触觉闭环。</p>
+
+  <div class="code-note">
+    <i class="fas fa-code-branch" style="margin-right: 8px; color:#2563eb;"></i>
+    <strong>双进程协作架构：</strong> APP.py 基于 PySimpleGUI 提供实时数据显示、串口配置、阈值一键录制与主程序启停控制；main.py 作为核心控制引擎，负责机械臂伺服驱动、手势识别解算、数据平滑滤波、步进电机指令下发以及仿生振动反馈的实时计算。二者通过 pickle 文件进行低延迟数据交换，解耦界面响应与实时控制。
+  </div>
+
+  <h2 class="section-title"><i class="fas fa-hand-back-fist" style="margin-right: 10px; color:#2563eb;"></i>手势定义与运动映射</h2>
+  <p>系统定义了四种核心手势，覆盖三维空间平移控制与系统复位，映射逻辑直观且符合人体自然习惯。同时，末端夹爪的力感知信号经Stevens幂律非线性补偿后，驱动线性振动马达产生仿生触觉反馈，使操作者能清晰感知抓握力度变化。</p>
+  
+  <div class="gesture-grid">
+    <div class="gesture-card">
+      <div class="gesture-icon"><i class="fas fa-hand-fist"></i></div>
+      <h3>握拳 · 复位</h3>
+      <p>五指全弯 > 阈值<br>机械臂立即执行 MoveJ 归位至预设安全点，同时退出伺服模式。</p>
+    </div>
+    <div class="gesture-card">
+      <div class="gesture-icon"><i class="fas fa-thumbs-up"></i></div>
+      <h3>只伸拇指 · X轴</h3>
+      <p>仅拇指伸直<br>控制机器人沿工具坐标系 X 方向平移。手掌倾斜角度决定运动方向。</p>
+    </div>
+    <div class="gesture-card">
+      <div class="gesture-icon"><i class="fas fa-hand-peace fa-rotate-90"></i></div>
+      <h3>只伸小指 · Z轴</h3>
+      <p>仅小指伸直<br>控制机器人沿工具坐标系 Z 方向平移（进深运动），适配夹爪等末端工具推进。</p>
+    </div>
+    <div class="gesture-card">
+      <div class="gesture-icon"><i class="fas fa-hand-spock"></i></div>
+      <h3>拇指+小指 · Y轴</h3>
+      <p>拇指与小指同时伸直<br>控制机器人沿工具坐标系 Y 方向平移，实现横向避让或高度调整。</p>
+    </div>
+  </div>
+
+  <h2 class="section-title"><i class="fas fa-sliders" style="margin-right: 10px; color:#2563eb;"></i>自适应阈值与步进电机控制</h2>
+  <p>针对不同使用者手部尺寸差异，系统设计了便捷的阈值自学习功能。通过界面按钮触发“握拳”与“伸掌”三秒数据采集，自动计算弯曲传感器平均值并持久化存储，作为手势识别的动态基准。</p>
+  <p style="margin-top: 0.8rem;">在模式1下，食指数值被划分为5个线性区间，对应末端步进电机的不同开合档位。从完全伸掌（区间1）到全力握拳（区间5），步进电机接收单字符指令（1~5）执行预定步数，实现对夹爪、注射器等工具的精细力度/位置控制。指令下发设有状态防抖与频率限制，避免电机过冲。</p>
+
+  <h2 class="section-title"><i class="fas fa-wave-square" style="margin-right: 10px; color:#2563eb;"></i>信号处理与安全机制</h2>
+  <ul style="margin-left: 1.8rem; margin-bottom: 1.5rem;">
+    <li><strong>数据平滑：</strong>对角度值采用长度为3的滑动窗口均值滤波，消除手部自然抖动，提供稳定控制信号。</li>
+    <li><strong>死区与迟滞：</strong>设置 ±3° 的角度死区，避免静止时微颤导致机械臂抖动。手势切换引入稳定性计时器，防止瞬时误识别。</li>
+    <li><strong>伺服模式智能启停：</strong>当角度超出死区时自动激活 ServoCart 伺服模式，闲置超过1秒自动退出，兼顾响应速度与能耗安全。</li>
+    <li><strong>运动限幅与超时：</strong>单次伺服增量限幅、指令发送频率限制（80ms间隔），确保机械臂运动平滑且不会失控。</li>
+    <li><strong>串口热插拔容错：</strong>底层串口读取包含异常捕获与重连逻辑，数据超时自动进入待机状态。</li>
+  </ul>
+
+  <h2 class="section-title"><i class="fas fa-microchip" style="margin-right: 10px; color:#2563eb;"></i>技术栈与工程实现</h2>
+  <p><span class="highlight">硬件层：</span>自研五通道弯曲传感器手套 + MPU6050姿态模块、Arduino 数据采集、步进电机驱动器及弹性耦合力感知夹爪。<br>
+  <span class="highlight">上位机界面：</span>PySimpleGUI 构建轻量级桌面仪表盘，实时波形展示、串口配置、阈值录制与状态监控。<br>
+  <span class="highlight">控制核心：</span>Python 多线程架构，利用 pickle 共享内存实现进程间数据交换；调用法奥机器人 SDK 的 RPC 接口与 ServoCart 实时伺服。<br>
+  <span class="highlight">仿生反馈：</span>基于Stevens幂律（γ=1.75）的非线性振动映射，实现力感知的感知线性化，以低成本提升遥操作精细度。<br>
+  <span class="highlight">信号处理：</span>滑动平均滤波、手势状态机、防抖计时器、线性区间映射。</p>
+
+  <p style="margin-top: 1.5rem; background: #f8fafc; padding: 1.2rem 1.5rem; border-radius: 20px;">
+    <i class="fas fa-check-circle" style="color: #2563eb; margin-right: 8px;"></i>
+    本项目实现了从手势意图感知到机器人运动执行，再到仿生触觉反馈的完整闭环。直观的手势映射大幅降低了遥操作学习成本，而基于心理物理学原理的振动反馈则在无需昂贵力反馈设备的前提下显著提升了力控表现。系统适用于医疗辅助、危险环境作业、远程实验等多种场景，代码结构清晰，便于二次开发与传感器扩展。
+  </p>
+
+  <!-- 按钮区（保持与项目一一致的功能链接，可根据实际情况替换） -->
+  <div class="action-buttons">
+    <a href="https://github.com/your-repo/glove-robot-control" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub 源码</a>
+    <a href="https://pan.quark.cn/s/example" target="_blank" class="btn"><i class="fas fa-play"></i> 观看演示视频</a>
+    <a href="main.html" class="btn btn-outline"><i class="fas fa-home"></i> 返回作品集</a>
+  </div>
+  
+  <p style="margin-top: 2.5rem; font-size:0.9rem; color:#64748b; text-align:center;">
+    <i class="far fa-calendar-alt"></i> 更新于 2026 · 张逸凡
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>项目展示 · 张逸凡</title>
+  <!-- Font Awesome 图标库 (v6 免费版) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== 原有样式 (保持完全一致, 仅新增卡片可点击提示) ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8fafc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+      color: #0f172a;
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .intro h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin-left: 1rem;
+      vertical-align: middle;
+    }
+
+    .subhead {
+      font-size: 1.3rem;
+      color: #334155;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      border-left: 5px solid #3b82f6;
+      padding-left: 1.5rem;
+    }
+
+    .bio {
+      color: #475569;
+      max-width: 720px;
+      font-size: 1.1rem;
+      margin-top: 0.75rem;
+      background: #ffffffd0;
+      padding: 1rem 1.8rem;
+      border-radius: 48px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      display: inline-block;
+    }
+
+    .bio i {
+      color: #2563eb;
+      margin-right: 0.5rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #f1f5f9;
+      /* 新增：鼠标变为手型，提示可点击跳转详情 */
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 40px -12px rgba(37, 99, 235, 0.15), 0 8px 16px -6px rgba(0, 0, 0, 0.05);
+      border-color: #e2e8f0;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      background: #f1f5f9;
+      border-bottom: 1px solid #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-wrapper img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      max-height: 220px;
+    }
+
+    .card-content {
+      padding: 1.6rem 1.5rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-title i {
+      color: #3b82f6;
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+
+    .project-description {
+      color: #334155;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .tech-tag {
+      background: #eef2ff;
+      color: #1e40af;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      letter-spacing: 0.01em;
+    }
+
+    .project-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: auto;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 1.2rem;
+    }
+
+    .btn-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #0f172a;
+      color: white;
+      padding: 0.65rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 8px -2px rgba(15, 23, 42, 0.1);
+      border: 1px solid #1e293b;
+    }
+
+    .btn-source i {
+      font-size: 1.1rem;
+    }
+
+    .btn-source:hover {
+      background: #2563eb;
+      border-color: #2563eb;
+      box-shadow: 0 8px 16px -4px #3b82f666;
+    }
+
+    .media-note {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-left: auto;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .media-note i {
+      color: #ef4444;
+      font-size: 0.9rem;
+    }
+
+    .video-link {
+      cursor: pointer;
+      color: #2563eb;
+      font-weight: 500;
+    }
+    .video-link:hover {
+      text-decoration: underline;
+      color: #1d4ed8;
+    }
+    .video-link i {
+      color: #ef4444;
+    }
+
+    .footer {
+      margin-top: 5rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.95rem;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+      .intro h1 {
+        font-size: 2.2rem;
+      }
+      .badge {
+        display: block;
+        margin: 0.5rem 0 0 0;
+      }
+      .bio {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+      }
+      .project-title {
+        font-size: 1.4rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .highlight {
+      color: #2563eb;
+      font-weight: 500;
+    }
+
+    /* 新增微细节：让卡片内按钮/链接依然保持默认指针（不会干扰卡片点击跳转） */
+    .project-card a, .project-card .btn-source, .project-card .media-note {
+      cursor: pointer;
+      /* 确保这些元素不会触发卡片本身的点击跳转 (通过JS阻止) */
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  
+  <!-- 头部：个人简介 (无改动) -->
+  <header class="intro">
+    <div style="display: flex; align-items: baseline; flex-wrap: wrap;">
+      <h1>主要项目作品集</h1>
+      <span class="badge"><i class="fas fa-code-branch"></i> 张逸凡</span>
+    </div>
+    <div class="subhead">
+      <i class="fas fa-align-left" style="margin:0 6px;"></i> 简介 · 
+      <i class="fab fa-github" style="margin:0 6px;"></i> 源码 · 
+      <i class="fas fa-image" style="margin:0 6px;"></i> 展示
+    </div>
+    <div class="bio">
+      <i class="fas fa-terminal"></i> 我是张逸凡，华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机器人项目，欢迎了解。
+    </div>
+  </header>
+
+  <!-- 项目网格 (卡片增加了 data-detail 属性用于跳转) -->
+  <section class="projects-grid">
+    
+    <!-- 项目 1 —— 全自动鼻镜 (点击卡片跳转详情页，按钮区域不触发跳转) -->
+    <article class="project-card" data-detail="project1-detail.html">
+      <div class="image-wrapper">
+        <img 
+          src="https://s41.ax1x.com/2026/04/13/peDCstU.jpg" 
+          alt="全自动鼻镜流程预览 · 硅胶模型实验"
+          loading="lazy"
+        >
+      </div>
+      <div class="card-content">
+        <div class="project-title">
+          <i class="fas fa-hospital"></i> 
+          全自动鼻镜检测与AI初筛系统
+        </div>
+        <p class="project-description">
+          <span class="highlight">简介</span> · 使用法奥意威FR5协作机器人，挂载鼻镜，完成完整鼻镜流程（Python脚本版本）。
+          注：项目尚处于中期，采集内容为硅胶模型，未进行分类检测。
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">视觉伺服</span>
+          <span class="tech-tag">手眼集成</span>
+          <span class="tech-tag">自主随动</span>
+        </div>
+        <div class="project-links">
+          <!-- 注意: 这些链接点击时不会触发卡片跳转 -->
+          <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" rel="noopener noreferrer" class="btn-source">
+            <i class="fab fa-github"></i> 查看源码
+          </a>
+          <a href="https://pan.quark.cn/s/baddd4a8b00c" target="_blank" rel="noopener noreferrer" class="media-note video-link">
+            <i class="fas fa-play-circle"></i> 演示视频
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 项目 2 —— 手套控制夹取系统 (同样支持点击卡片跳转) -->
+    <article class="project-card" data-detail="project2-detail.html">
+      <div class="image-wrapper">
+        <img 
+          src="https://s41.ax1x.com/2026/04/13/peD9LwV.jpg" 
+          alt="手套简易操控 · 夹取系统"
+          loading="lazy"
+        >
+      </div>
+      <div class="card-content">
+        <div class="project-title">
+          <i class="fas fa-robot"></i>
+          智能手套遥操作机器人系统
+        </div>
+        <p class="project-description">
+          <span class="highlight">简介</span> · 一个由具备指尖仿生振动反馈的控制手套控制的夹取系统，使用法奥意威FR5协作机器人和自制步进电机驱动的夹爪模组构成。
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">手势遥操作</span>
+          <span class="tech-tag">多模态集成</span>
+          <span class="tech-tag">实时伺服控制</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/2775002142/Gloves-controlling-robotic-arm" target="_blank" rel="noopener noreferrer" class="btn-source">
+            <i class="fab fa-github"></i> 查看源码
+          </a>
+          <span class="media-note">
+            <i class="fas fa-image"></i> 界面预览
+          </span>
+        </div>
+      </div>
+    </article>
+  </section>
+ 
+  <!-- 页脚 (无改动) -->
+  <footer class="footer">
+    <div>
+      <i class="far fa-copyright"></i> 2026 张逸凡 · 个人项目展示
+    </div>
+    <div>
+      <i class="fas fa-code"></i> 
+      <a href="#" onclick="alert('👨‍💻 所有项目均包含简介、源码链接，主要项目包含展示内容。点击卡片可查看详情页。'); return false;">
+        关于本页
+      </a> 
+      &nbsp;|&nbsp; 
+      <i class="fab fa-github"></i> 
+      <a href="https://github.com/2775002142" target="_blank">@zyf</a>
+    </div>
+  </footer>
+</div>
+
+<!-- 简单的跳转逻辑：点击卡片(排除内部链接/按钮) 跳转到详情页 -->
+<script>
+  (function() {
+    // 获取所有项目卡片
+    const cards = document.querySelectorAll('.project-card');
+    
+    cards.forEach(card => {
+      card.addEventListener('click', function(event) {
+        // 关键: 如果点击的元素本身是链接(<a>) 或者 它的父级中有 .btn-source, .media-note, .video-link 等可交互元素
+        // 则我们不执行卡片跳转，让那些链接/按钮自己的行为正常发生。
+        const target = event.target;
+        
+        // 使用 closest 检测是否点击了链接或者具有特定类的元素（包括按钮区域）
+        // 注意：.media-note 可能是 span 或者 a，只要存在就不触发跳转
+        if (target.closest('a') || target.closest('.btn-source') || target.closest('.media-note')) {
+          // 如果是链接或按钮，不做任何事，让浏览器处理它们的默认行为（例如打开链接）
+          return;
+        }
+        
+        // 如果点击的是卡片其他区域（图片、文字、标签等），则跳转到详情页
+        const detailUrl = card.getAttribute('data-detail');
+        if (detailUrl) {
+          window.location.href = detailUrl;
+        }
+      });
+    });
+    
+    // 可选：为卡片内的“界面预览”span（项目2）增加一点样式提示，但不影响跳转逻辑
+    // 已经通过上述closest排除了 .media-note
+  })();
+</script>
+
+<!-- 
+  说明：实现跳转非常简单，只需要：
+  1. 给每个 .project-card 添加 data-detail 属性，指向详情页文件名。
+  2. 添加上述 script，过滤掉对按钮/链接的点击。
+  3. 同时将 .project-card 的 cursor 设为 pointer (已在CSS中添加)。
+  
+  接下来，你可以创建 project1-detail.html 和 project2-detail.html，
+  下面给出一个详情页模板示例 (简洁现代风格，与主页统一)。
+-->
+</body>
+</html>
