@@ -7,7 +7,7 @@
   <!-- Font Awesome 图标库 (v6 免费版) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ===== 原有样式 (保持完全一致, 仅新增卡片可点击提示) ===== */
+    /* ===== 全局重置 & 原有基础 ===== */
     * {
       margin: 0;
       padding: 0;
@@ -27,62 +27,217 @@
       margin: 0 auto;
     }
 
+    /* ===== 全新设计 · 头部区域 ===== */
     .intro {
       margin-bottom: 3.5rem;
+      position: relative;
+      border-radius: 2.5rem;
+      padding: 2.2rem 2.5rem 2.5rem;
+      /* 更通透的背景叠加：微光渐变 + 背景图，并加入细微的 blend 效果 */
+      background-image: 
+        linear-gradient(145deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 248, 255, 0.25) 100%),
+        url('https://s41.ax1x.com/2026/04/16/pesBgx0.jpg');
+      background-size: cover;
+      background-position: center 28%;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      box-shadow: 
+        0 20px 35px -8px rgba(0, 20, 60, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+        0 0 0 1px rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(3px);
+      transition: box-shadow 0.3s ease;
+      overflow: hidden;  /* 让装饰元素不溢出 */
     }
 
+    /* 装饰性几何元素 —— 增加设计层次 */
+    .intro::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.02) 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .intro::after {
+      content: "";
+      position: absolute;
+      bottom: -15%;
+      left: -3%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* 保证文字内容在伪元素上方 */
+    .intro > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 标题行：更精致的排版 */
     .intro h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 750;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
+      color: #0b1e3c;                /* 深邃海军蓝，稳重又有质感 */
+      text-shadow: 
+        0 4px 18px rgba(255, 255, 255, 0.9),
+        0 1px 3px rgba(0, 0, 0, 0.02);
+      margin-bottom: 0.3rem;
       display: inline-block;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      line-height: 1.2;
+      position: relative;
+    }
+
+    /* 标题下方优雅的装饰短横线 */
+    .intro h1::after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb, #60a5fa, #a5c9ff);
+      border-radius: 4px;
+      margin-top: 10px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
     }
 
     .badge {
-      display: inline-block;
-      background: #e0e7ff;
-      color: #3730a3;
-      font-weight: 500;
-      font-size: 0.9rem;
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      margin-left: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #f0f6ff;
+      font-weight: 550;
+      font-size: 1rem;
+      padding: 0.35rem 1.5rem 0.35rem 1.2rem;
+      border-radius: 60px;
+      margin-left: 1.2rem;
       vertical-align: middle;
+      box-shadow: 0 8px 14px -6px rgba(0, 20, 40, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      letter-spacing: 0.3px;
+      transition: transform 0.2s;
+    }
+
+    .badge i {
+      font-size: 1rem;
+      color: #90c0ff;
+    }
+
+    .badge:hover {
+      transform: scale(1.02);
+      background: rgba(20, 40, 70, 0.75);
     }
 
     .subhead {
-      font-size: 1.3rem;
-      color: #334155;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      font-weight: 400;
-      border-left: 5px solid #3b82f6;
-      padding-left: 1.5rem;
+      font-size: 1.25rem;
+      color: #13294b;
+      margin-top: 0.7rem;
+      margin-bottom: 1.4rem;
+      font-weight: 480;
+      border-left: 6px solid #2563eb;
+      padding-left: 1.6rem;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      letter-spacing: -0.01em;
     }
 
-    .bio {
-      color: #475569;
-      max-width: 720px;
+    .subhead i {
+      color: #1e4bd2;
+      margin: 0 4px 0 0;
+      opacity: 0.9;
       font-size: 1.1rem;
-      margin-top: 0.75rem;
-      background: #ffffffd0;
-      padding: 1rem 1.8rem;
-      border-radius: 48px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    /* 个人简介卡片 —— 更精致的毛玻璃胶囊 */
+    .bio {
+      color: #0a1a2f;
+      max-width: fit-content;
+      font-size: 1.15rem;
+      margin-top: 0.5rem;
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 1.1rem 2.2rem;
+      border-radius: 60px;
+      box-shadow: 
+        0 12px 28px -12px rgba(2, 20, 50, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+        0 0 0 1px rgba(59, 130, 246, 0.15);
       display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-weight: 480;
+      white-space: nowrap;
+      transition: box-shadow 0.3s;
+      line-height: 1.5;
     }
 
     .bio i {
       color: #2563eb;
-      margin-right: 0.5rem;
+      margin-right: 0.7rem;
+      font-size: 1.2rem;
+      text-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
     }
 
+    .bio:hover {
+      box-shadow: 0 18px 30px -8px rgba(37, 99, 235, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 640px) {
+      .intro {
+        padding: 1.5rem 1.2rem 1.8rem;
+        border-radius: 1.8rem;
+        backdrop-filter: blur(4px);
+      }
+      .intro h1 {
+        font-size: 2.4rem;
+      }
+      .intro h1::after {
+        width: 50px;
+        height: 3px;
+      }
+      .badge {
+        display: inline-flex;
+        margin: 0.6rem 0 0 0;
+        font-size: 0.9rem;
+        padding: 0.3rem 1.2rem;
+      }
+      .subhead {
+        font-size: 1.1rem;
+        padding-left: 1.2rem;
+      }
+      .bio {
+        padding: 0.9rem 1.6rem;
+        font-size: 1rem;
+        white-space: normal;
+        width: auto;
+        max-width: 100%;
+        border-radius: 40px;
+        backdrop-filter: blur(12px);
+      }
+    }
+
+    /* ===== 项目卡片等原有样式 (保持与之前一致，仅微调交互) ===== */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -99,7 +254,6 @@
       display: flex;
       flex-direction: column;
       border: 1px solid #f1f5f9;
-      /* 新增：鼠标变为手型，提示可点击跳转详情 */
       cursor: pointer;
     }
 
@@ -235,69 +389,8 @@
       text-decoration: underline;
       color: #1d4ed8;
     }
-    .video-link i {
-      color: #ef4444;
-    }
 
-    .footer {
-      margin-top: 5rem;
-      text-align: center;
-      color: #64748b;
-      font-size: 0.95rem;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer a {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 1.5rem 1rem;
-      }
-      .intro h1 {
-        font-size: 2.2rem;
-      }
-      .badge {
-        display: block;
-        margin: 0.5rem 0 0 0;
-      }
-      .bio {
-        padding: 0.8rem 1.2rem;
-        font-size: 1rem;
-      }
-      .project-title {
-        font-size: 1.4rem;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    .highlight {
-      color: #2563eb;
-      font-weight: 500;
-    }
-
-    /* 新增微细节：让卡片内按钮/链接依然保持默认指针（不会干扰卡片点击跳转） */
-    .project-card a, .project-card .btn-source, .project-card .media-note {
-      cursor: pointer;
-      /* 确保这些元素不会触发卡片本身的点击跳转 (通过JS阻止) */
-    }
-
-    /* ===== 新增：辅助能力区域样式 (轻量、不抢眼) ===== */
+    /* 辅助技能区域 */
     .auxiliary-skills {
       margin-top: 3.5rem;
       margin-bottom: 2rem;
@@ -361,8 +454,41 @@
       line-height: 1.5;
     }
 
-    /* 移动端适配辅助技能网格 */
+    /* 页脚 */
+    .footer {
+      margin-top: 5rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.95rem;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 640px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+      .project-title {
+        font-size: 1.4rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
       .skills-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -372,37 +498,35 @@
       }
     }
 
-    /* 保持整体协调，footer 上边距稍减 (因为有辅助区)  */
-    @media (min-width: 641px) {
-      .footer {
-        margin-top: 3.5rem;
-      }
+    .highlight {
+      color: #2563eb;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 <div class="container">
   
-  <!-- 头部：个人简介 (无改动) -->
+  <!-- 头部：个人简介 (设计感全面升级，文字内容保持不变) -->
   <header class="intro">
     <div style="display: flex; align-items: baseline; flex-wrap: wrap;">
       <h1>主要项目作品集</h1>
       <span class="badge"><i class="fas fa-code-branch"></i> 张逸凡</span>
     </div>
     <div class="subhead">
-      <i class="fas fa-align-left" style="margin:0 6px;"></i> 简介 · 
-      <i class="fab fa-github" style="margin:0 6px;"></i> 源码 · 
-      <i class="fas fa-image" style="margin:0 6px;"></i> 展示
+      <i class="fas fa-align-left"></i> 简介 · 
+      <i class="fab fa-github"></i> 源码 · 
+      <i class="fas fa-image"></i> 展示
     </div>
     <div class="bio">
       <i class="fas fa-terminal"></i> 我是张逸凡，一名华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机械臂相关项目，欢迎了解。
     </div>
   </header>
 
-  <!-- 项目网格 (卡片增加了 data-detail 属性用于跳转) -->
+  <!-- 项目网格 (保持不变) -->
   <section class="projects-grid">
     
-    <!-- 项目 1 —— 全自动鼻镜 (点击卡片跳转详情页，按钮区域不触发跳转) -->
+    <!-- 项目 1 —— 全自动鼻镜 -->
     <article class="project-card" data-detail="project1-detail.html">
       <div class="image-wrapper">
         <img 
@@ -426,7 +550,6 @@
           <span class="tech-tag">自主随动</span>
         </div>
         <div class="project-links">
-          <!-- 注意: 这些链接点击时不会触发卡片跳转 -->
           <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" rel="noopener noreferrer" class="btn-source">
             <i class="fab fa-github"></i> 查看源码
           </a>
@@ -437,7 +560,7 @@
       </div>
     </article>
 
-    <!-- 项目 2 —— 手套控制夹取系统 (同样支持点击卡片跳转) -->
+    <!-- 项目 2 —— 手套控制夹取系统 -->
     <article class="project-card" data-detail="project2-detail.html">
       <div class="image-wrapper">
         <img 
@@ -471,14 +594,13 @@
     </article>
   </section>
 
-  <!-- ===== 新增：辅助能力区域 (轻量，低调展示) ===== -->
+  <!-- 辅助能力区域 -->
   <section class="auxiliary-skills">
     <div class="skills-title">
       <i class="fas fa-toolbox"></i> 辅助技能与工具链
       <span style="font-size:0.75rem; font-weight:400; color:#64748b; margin-left:0.5rem;">项目开发中实际应用</span>
     </div>
     <div class="skills-grid">
-      <!-- 能力1：SolidWorks 建模与3D打印 -->
       <div class="skill-item">
         <div class="skill-icon"><i class="fas fa-cube"></i></div>
         <div class="skill-name">SolidWorks 建模 · 3D打印</div>
@@ -486,15 +608,13 @@
           能够进行简单结构设计，制作内窥镜挂载件、夹爪组装件等，并完成打印验证。
         </div>
       </div>
-      <!-- 能力2：MATLAB 优化算法评估 -->
       <div class="skill-item">
         <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
         <div class="skill-name">MATLAB 优化算法复现</div>
         <div class="skill-desc">
-          复现经典优化算法（PSO、ABC、BA、MA等），使用23种标准测试函数进行性能对比与分析。
+          复现经典优化算法，使用23种标准测试函数进行性能对比与分析。
         </div>
       </div>
-      <!-- 能力3：ResNet-50 医学图像分类 -->
       <div class="skill-item">
         <div class="skill-icon"><i class="fas fa-brain"></i></div>
         <div class="skill-name">ResNet-50 图像分类</div>
@@ -503,10 +623,9 @@
         </div>
       </div>
     </div>
-    <!-- 极简提示：无额外文字，只通过卡片传达 -->
   </section>
  
-  <!-- 页脚 (无改动) -->
+  <!-- 页脚 -->
   <footer class="footer">
     <div>
       <i class="far fa-copyright"></i> 2026 张逸凡 · 个人项目展示
@@ -523,46 +642,23 @@
   </footer>
 </div>
 
-<!-- 简单的跳转逻辑：点击卡片(排除内部链接/按钮) 跳转到详情页 -->
+<!-- 卡片跳转逻辑 -->
 <script>
   (function() {
-    // 获取所有项目卡片
     const cards = document.querySelectorAll('.project-card');
-    
     cards.forEach(card => {
       card.addEventListener('click', function(event) {
-        // 关键: 如果点击的元素本身是链接(<a>) 或者 它的父级中有 .btn-source, .media-note, .video-link 等可交互元素
-        // 则我们不执行卡片跳转，让那些链接/按钮自己的行为正常发生。
         const target = event.target;
-        
-        // 使用 closest 检测是否点击了链接或者具有特定类的元素（包括按钮区域）
-        // 注意：.media-note 可能是 span 或者 a，只要存在就不触发跳转
         if (target.closest('a') || target.closest('.btn-source') || target.closest('.media-note')) {
-          // 如果是链接或按钮，不做任何事，让浏览器处理它们的默认行为（例如打开链接）
           return;
         }
-        
-        // 如果点击的是卡片其他区域（图片、文字、标签等），则跳转到详情页
         const detailUrl = card.getAttribute('data-detail');
         if (detailUrl) {
           window.location.href = detailUrl;
         }
       });
     });
-    
-    // 可选：为卡片内的“界面预览”span（项目2）增加一点样式提示，但不影响跳转逻辑
-    // 已经通过上述closest排除了 .media-note
   })();
 </script>
-
-<!-- 
-  说明：实现跳转非常简单，只需要：
-  1. 给每个 .project-card 添加 data-detail 属性，指向详情页文件名。
-  2. 添加上述 script，过滤掉对按钮/链接的点击。
-  3. 同时将 .project-card 的 cursor 设为 pointer (已在CSS中添加)。
-  
-  接下来，你可以创建 project1-detail.html 和 project2-detail.html，
-  下面给出一个详情页模板示例 (简洁现代风格，与主页统一)。
--->
 </body>
 </html>
