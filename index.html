@@ -296,6 +296,88 @@
       cursor: pointer;
       /* 确保这些元素不会触发卡片本身的点击跳转 (通过JS阻止) */
     }
+
+    /* ===== 新增：辅助能力区域样式 (轻量、不抢眼) ===== */
+    .auxiliary-skills {
+      margin-top: 3.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .skills-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.6rem;
+    }
+
+    .skills-title i {
+      color: #3b82f6;
+      font-size: 1.2rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .skill-item {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+      transition: border 0.15s;
+    }
+
+    .skill-item:hover {
+      border-color: #cbd5e1;
+      background: #fdfdfe;
+    }
+
+    .skill-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.7rem;
+      color: #2563eb;
+      opacity: 0.85;
+    }
+
+    .skill-name {
+      font-weight: 650;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: #0f172a;
+    }
+
+    .skill-desc {
+      font-size: 0.8rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* 移动端适配辅助技能网格 */
+    @media (max-width: 640px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .auxiliary-skills {
+        margin-top: 2.5rem;
+      }
+    }
+
+    /* 保持整体协调，footer 上边距稍减 (因为有辅助区)  */
+    @media (min-width: 641px) {
+      .footer {
+        margin-top: 3.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -313,7 +395,7 @@
       <i class="fas fa-image" style="margin:0 6px;"></i> 展示
     </div>
     <div class="bio">
-      <i class="fas fa-terminal"></i> 我是张逸凡，华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机器人项目，欢迎了解。
+      <i class="fas fa-terminal"></i> 我是张逸凡，一名华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机械臂相关项目，欢迎了解。
     </div>
   </header>
 
@@ -387,6 +469,41 @@
         </div>
       </div>
     </article>
+  </section>
+
+  <!-- ===== 新增：辅助能力区域 (轻量，低调展示) ===== -->
+  <section class="auxiliary-skills">
+    <div class="skills-title">
+      <i class="fas fa-toolbox"></i> 辅助技能与工具链
+      <span style="font-size:0.75rem; font-weight:400; color:#64748b; margin-left:0.5rem;">项目开发中实际应用</span>
+    </div>
+    <div class="skills-grid">
+      <!-- 能力1：SolidWorks 建模与3D打印 -->
+      <div class="skill-item">
+        <div class="skill-icon"><i class="fas fa-cube"></i></div>
+        <div class="skill-name">SolidWorks 建模 · 3D打印</div>
+        <div class="skill-desc">
+          能够进行简单结构设计，制作内窥镜挂载件、夹爪组装件等，并完成打印验证。
+        </div>
+      </div>
+      <!-- 能力2：MATLAB 优化算法评估 -->
+      <div class="skill-item">
+        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="skill-name">MATLAB 优化算法复现</div>
+        <div class="skill-desc">
+          复现经典优化算法（PSO、ABC、BA、MA等），使用23种标准测试函数进行性能对比与分析。
+        </div>
+      </div>
+      <!-- 能力3：ResNet-50 医学图像分类 -->
+      <div class="skill-item">
+        <div class="skill-icon"><i class="fas fa-brain"></i></div>
+        <div class="skill-name">ResNet-50 图像分类</div>
+        <div class="skill-desc">
+          训练基于 ResNet-50 的 CNN 模型，实现鼻腔图像三分类（鼻咽癌 / 囊肿 / 正常）。
+        </div>
+      </div>
+    </div>
+    <!-- 极简提示：无额外文字，只通过卡片传达 -->
   </section>
  
   <!-- 页脚 (无改动) -->
