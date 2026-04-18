@@ -140,15 +140,14 @@
 </head>
 <body>
 <div class="detail-container">
-  <a href="main.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回项目列表</a>
+  <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回项目列表</a>
   
   <div class="detail-header">
     <i class="fas fa-brain"></i>
     <h1>全自动鼻镜检测与AI初筛系统 <span class="detail-badge">与中山三院合作项目</span></h1>
   </div>
   
-  <p style="font-size:1.2rem; color:#334155; margin-bottom:1.2rem;">
-    <i class="fas fa-quote-left" style="color:#2563eb; opacity:0.7;"></i> 
+  <p style="font-size:1.2rem; color:#334155; margin-bottom:1.2rem;"> 
     基于法奥意威 FR5 协作机器人，挂载内窥镜，完成从体外面部定位到体内腔道跟随的完整自主流程。提供 ROS2 分布式节点与纯 Python 单脚本两种实现，核心算法一致，适配不同部署场景。
   </p>
   
@@ -176,14 +175,14 @@
   <p style="margin-top: 0.8rem;">在工程实现上，ROS2 版将感知、决策、控制拆分为独立节点，通过话题与动作服务异步交互；纯 Python 版则将所有逻辑封装于单一主循环中，直接调用法奥 SDK 的底层 RPC 接口完成工具坐标系下的偏移移动。二者均包含目标丢失后的等待重试与后退复位机制。</p>
 
   <h2 class="section-title"><i class="fas fa-route" style="margin-right: 10px; color:#2563eb;"></i>第二阶段：体内受限环境力场导航</h2>
-  <p>工具进入腔口后，视野瞬间变暗且缺乏全局特征。系统首先进入“盲走”阶段：以小步长沿工具 Z 轴开环推进，同时持续监测视野中是否出现稳定的暗区纹理。一旦连续多帧检测到有效目标，即自动切换至视觉闭环控制，巧妙解决了入口处的视觉失效问题。</p>
+  <p>工具进入腔口后，视野瞬间变暗且缺乏全局特征。系统首先进入“盲走”阶段：以小步长沿工具 Z 轴开环推进，同时持续监测视野中是否出现稳定的暗区纹理。一旦连续多帧检测到有效目标，即自动切换至视觉闭环控制，解决了入口处的阶段衔接问题。</p>
   <p style="margin-top: 0.8rem;">闭环导航的核心是基于人工势场（APF）的力场计算。图像经 CLAHE 增强与高斯模糊后，通过百分位阈值分割出暗区（引力源）与亮区（斥力源），实时合成引导工具向画面中心靠拢的合力矢量。为提高信号平滑度，系统对力场分量施加 EMA 滤波，并对目标点位置运行二维卡尔曼滤波器进行轨迹预测，有效抑制了腔内图像噪声引起的抖动。</p>
   <p style="margin-top: 0.8rem;">力场矢量通过一个非线性转换器映射为机械臂的动作：力的方向决定工具坐标系的旋转方向（Rx/Ry），力的大小则用于动态调整旋转增益与 XY 平移步长——偏离中心越远，动作越果断；越靠近中心，调整越精细。转换器还包含死区阈值、单次最大角度/平移限幅以及每阶段累积量限制，防止过冲。状态机在“旋转对齐”与“直向前进”之间采用滞回切换，过渡期间通过线性插值实现运动指令的淡入淡出，进一步柔化机械臂轨迹。</p>
   <p style="margin-top: 0.8rem;">在架构层面，ROS2 版将力场转换、卡尔曼滤波、状态机评估分散在节点回调中，并利用多线程执行器实现图像处理与运动控制的并发；纯 Python 版则以紧凑的主循环完成所有计算，并通过线程池异步下发运动指令，同时借助 OpenCV 绘制丰富的调试界面（力场箭头、滤波前后目标点、深度进度条等），使算法内部状态一目了然。</p>
 
   <h2 class="section-title"><i class="fas fa-shield-hal" style="margin-right: 10px; color:#2563eb;"></i>安全与鲁棒性设计</h2>
   <ul style="margin-left: 1.8rem; margin-bottom: 1.5rem;">
-    <li><strong>多重滤波链路：</strong> EMA 平滑力场与像素距离，卡尔曼滤波预测目标轨迹，异常帧拒绝剔除跳变野值，共同保证视觉信号可靠。</li>
+    <li><strong>多重滤波链路：</strong> EMA 平滑力场与像素距离，卡尔曼滤波预测目标轨迹，异常帧拒绝剔除跳变值，共同保证视觉信号可靠。</li>
     <li><strong>滞回状态机 + 帧计数防抖：</strong> 避免在阈值边界频繁切换状态，防止机械臂震颤。</li>
     <li><strong>累积量安全限制：</strong> 单阶段旋转角度上限、总深度上限、平移累积上限，防止运动超调或碰撞。</li>
     <li><strong>错误恢复：</strong> 目标丢失超时后自动后退重试；ROS2 版利用服务重试机制，纯 Python 版内置 SDK 重发逻辑，应对通信抖动。</li>
@@ -204,7 +203,7 @@
   <div class="action-buttons">
     <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub 源码</a>
     <a href="https://pan.quark.cn/s/baddd4a8b00c" target="_blank" class="btn"><i class="fas fa-play"></i> 观看演示视频</a>
-    <a href="main.html" class="btn btn-outline"><i class="fas fa-home"></i> 返回作品集</a>
+    <a href="index.html" class="btn btn-outline"><i class="fas fa-home"></i> 返回作品集</a>
   </div>
   
   <p style="margin-top: 2.5rem; font-size:0.9rem; color:#64748b; text-align:center;">
