@@ -4,661 +4,325 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>项目展示 · 张逸凡</title>
-  <!-- Font Awesome 图标库 (v6 免费版) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ===== 全局重置 & 原有基础 ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ===== 全局基础 ===== */
+    html { scroll-behavior: smooth; }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background: #f8fafc;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+      background: radial-gradient(circle at top right, #f0f7ff 0%, #f8fafc 100%);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       color: #0f172a;
       line-height: 1.5;
       padding: 2rem 1.5rem;
     }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1280px; margin: 0 auto; }
 
-    /* ===== 全新设计 · 头部区域 ===== */
+    /* ===== 1. 头部区域：修复过曝问题 ===== */
     .intro {
       margin-bottom: 3.5rem;
       position: relative;
       border-radius: 2.5rem;
-      padding: 2.2rem 2.5rem 2.5rem;
-      /* 更通透的背景叠加：微光渐变 + 背景图，并加入细微的 blend 效果 */
+      padding: 3rem;
+      /* 降低遮罩层透明度 (0.9 -> 0.4)，让图片清晰可见 */
       background-image: 
-        linear-gradient(145deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 248, 255, 0.25) 100%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 248, 255, 0.2) 100%),
         url('https://s41.ax1x.com/2026/04/16/pesBgx0.jpg');
       background-size: cover;
       background-position: center 28%;
-      background-repeat: no-repeat;
       background-blend-mode: overlay;
-      box-shadow: 
-        0 20px 35px -8px rgba(0, 20, 60, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-        0 0 0 1px rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(3px);
-      transition: box-shadow 0.3s ease;
-      overflow: hidden;  /* 让装饰元素不溢出 */
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(4px);
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    /* 装饰性几何元素 —— 增加设计层次 */
-    .intro::before {
-      content: "";
-      position: absolute;
-      top: -20%;
-      right: -5%;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.02) 70%);
-      border-radius: 50%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .intro::after {
-      content: "";
-      position: absolute;
-      bottom: -15%;
-      left: -3%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
-      border-radius: 50%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* 保证文字内容在伪元素上方 */
-    .intro > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* 标题行：更精致的排版 */
     .intro h1 {
-      font-size: 3rem;
-      font-weight: 750;
-      letter-spacing: -0.02em;
-      color: #0b1e3c;                /* 深邃海军蓝，稳重又有质感 */
-      text-shadow: 
-        0 4px 18px rgba(255, 255, 255, 0.9),
-        0 1px 3px rgba(0, 0, 0, 0.02);
-      margin-bottom: 0.3rem;
-      display: inline-block;
-      background: none;
-      -webkit-background-clip: unset;
-      background-clip: unset;
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, #0b1e3c, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
       line-height: 1.2;
-      position: relative;
     }
 
-    /* 标题下方优雅的装饰短横线 */
     .intro h1::after {
       content: '';
       display: block;
       width: 70px;
       height: 4px;
-      background: linear-gradient(90deg, #2563eb, #60a5fa, #a5c9ff);
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
       border-radius: 4px;
       margin-top: 10px;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #f0f6ff;
-      font-weight: 550;
-      font-size: 1rem;
-      padding: 0.35rem 1.5rem 0.35rem 1.2rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+      font-weight: 600;
+      padding: 0.4rem 1.2rem;
       border-radius: 60px;
       margin-left: 1.2rem;
       vertical-align: middle;
-      box-shadow: 0 8px 14px -6px rgba(0, 20, 40, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      letter-spacing: 0.3px;
-      transition: transform 0.2s;
+      border: 1px solid rgba(37, 99, 235, 0.2);
     }
 
-    .badge i {
-      font-size: 1rem;
-      color: #90c0ff;
-    }
-
-    .badge:hover {
-      transform: scale(1.02);
-      background: rgba(20, 40, 70, 0.75);
-    }
-
-    .subhead {
-      font-size: 1.25rem;
-      color: #13294b;
-      margin-top: 0.7rem;
-      margin-bottom: 1.4rem;
-      font-weight: 480;
-      border-left: 6px solid #2563eb;
-      padding-left: 1.6rem;
-      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 4px 12px;
-      letter-spacing: -0.01em;
-    }
-
-    .subhead i {
-      color: #1e4bd2;
-      margin: 0 4px 0 0;
-      opacity: 0.9;
-      font-size: 1.1rem;
-    }
-
-    /* 个人简介卡片 —— 更精致的毛玻璃胶囊 */
     .bio {
-      color: #0a1a2f;
-      max-width: fit-content;
-      font-size: 1.15rem;
-      margin-top: 0.5rem;
-      background: rgba(255, 255, 255, 0.68);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 1.1rem 2.2rem;
-      border-radius: 60px;
-      box-shadow: 
-        0 12px 28px -12px rgba(2, 20, 50, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
-        0 0 0 1px rgba(59, 130, 246, 0.15);
+      color: #1e293b;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 50px;
       display: inline-block;
+      margin-top: 1.5rem;
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.5);
-      font-weight: 480;
-      white-space: nowrap;
-      transition: box-shadow 0.3s;
-      line-height: 1.5;
     }
 
-    .bio i {
-      color: #2563eb;
-      margin-right: 0.7rem;
-      font-size: 1.2rem;
-      text-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
-    }
-
-    .bio:hover {
-      box-shadow: 0 18px 30px -8px rgba(37, 99, 235, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
-      background: rgba(255, 255, 255, 0.75);
-    }
-
-    /* 移动端适配 */
-    @media (max-width: 640px) {
-      .intro {
-        padding: 1.5rem 1.2rem 1.8rem;
-        border-radius: 1.8rem;
-        backdrop-filter: blur(4px);
-      }
-      .intro h1 {
-        font-size: 2.4rem;
-      }
-      .intro h1::after {
-        width: 50px;
-        height: 3px;
-      }
-      .badge {
-        display: inline-flex;
-        margin: 0.6rem 0 0 0;
-        font-size: 0.9rem;
-        padding: 0.3rem 1.2rem;
-      }
-      .subhead {
-        font-size: 1.1rem;
-        padding-left: 1.2rem;
-      }
-      .bio {
-        padding: 0.9rem 1.6rem;
-        font-size: 1rem;
-        white-space: normal;
-        width: auto;
-        max-width: 100%;
-        border-radius: 40px;
-        backdrop-filter: blur(12px);
-      }
-    }
-
-    /* ===== 项目卡片等原有样式 (保持与之前一致，仅微调交互) ===== */
+    /* ===== 2. 项目网格与卡片：优化图片显示 ===== */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 2rem 1.8rem;
-      margin-top: 1rem;
+      gap: 2rem;
     }
 
     .project-card {
       background: #ffffff;
-      border-radius: 28px;
-      box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.02);
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid #eef2ff;
       overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #f1f5f9;
-      cursor: pointer;
+      animation: fadeInUp 0.8s ease-out backwards;
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 24px 40px -12px rgba(37, 99, 235, 0.15), 0 8px 16px -6px rgba(0, 0, 0, 0.05);
-      border-color: #e2e8f0;
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.15);
+      border-color: #3b82f6;
     }
 
     .image-wrapper {
-      width: 100%;
+      height: 240px; /* 略微增加高度 */
       background: #f1f5f9;
-      border-bottom: 1px solid #eef2ff;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      padding: 10px; /* 留出一点边距，防止图片贴边 */
     }
 
     .image-wrapper img {
-      display: block;
       width: 100%;
-      height: auto;
-      object-fit: cover;
-      max-height: 220px;
+      height: 100%;
+      /* 改为 contain 确保机械臂图片显示完整 */
+      object-fit: contain; 
+      transition: transform 0.5s ease;
     }
 
-    .card-content {
-      padding: 1.6rem 1.5rem 1.8rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+    /* 降低缩放倍数，防止画面意义不明 */
+    .project-card:hover .image-wrapper img {
+      transform: scale(1.04);
     }
+
+    .card-content { padding: 1.8rem; }
 
     .project-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.6rem;
       color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      margin-bottom: 0.8rem;
     }
 
-    .project-title i {
-      color: #3b82f6;
-      font-size: 1.4rem;
-      opacity: 0.8;
-    }
+    .project-title i { color: #2563eb; margin-right: 8px; }
 
     .project-description {
-      color: #334155;
+      color: #475569;
+      font-size: 0.95rem;
       margin-bottom: 1.5rem;
-      font-size: 1rem;
-      line-height: 1.6;
-      flex: 1;
+      min-height: 3em;
     }
 
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.6rem;
-    }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 
     .tech-tag {
-      background: #eef2ff;
-      color: #1e40af;
+      background: #f0f7ff;
+      color: #2563eb;
       font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      letter-spacing: 0.01em;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
     }
 
+    /* ===== 3. 按钮美化：解决黑色方框问题 ===== */
     .project-links {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-top: auto;
-      border-top: 1px dashed #cbd5e1;
+      justify-content: space-between;
+      border-top: 1px solid #f1f5f9;
       padding-top: 1.2rem;
     }
 
     .btn-source {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: #0f172a;
+      gap: 8px;
+      /* 改为深蓝色渐变，不再是纯黑色方块 */
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
       color: white;
-      padding: 0.65rem 1.4rem;
-      border-radius: 60px;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
       font-weight: 500;
-      font-size: 0.95rem;
       text-decoration: none;
-      transition: background 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 8px -2px rgba(15, 23, 42, 0.1);
-      border: 1px solid #1e293b;
-    }
-
-    .btn-source i {
-      font-size: 1.1rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.15);
     }
 
     .btn-source:hover {
-      background: #2563eb;
-      border-color: #2563eb;
-      box-shadow: 0 8px 16px -4px #3b82f666;
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
     }
 
     .media-note {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.8rem;
       color: #64748b;
-      margin-left: auto;
+      font-size: 0.85rem;
       text-decoration: none;
-      transition: color 0.2s;
     }
+    .media-note:hover { color: #2563eb; }
 
-    .media-note i {
-      color: #ef4444;
-      font-size: 0.9rem;
-    }
-
-    .video-link {
-      cursor: pointer;
-      color: #2563eb;
-      font-weight: 500;
-    }
-    .video-link:hover {
-      text-decoration: underline;
-      color: #1d4ed8;
-    }
-
-    /* 辅助技能区域 */
-    .auxiliary-skills {
-      margin-top: 3.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .skills-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #334155;
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 0.6rem;
-    }
-
-    .skills-title i {
-      color: #3b82f6;
-      font-size: 1.2rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-    }
-
+    /* 辅助能力 */
+    .auxiliary-skills { margin-top: 4rem; }
+    .skills-title { font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .skill-item {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 1.1rem 1.2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-      border: 1px solid #edf2f7;
-      transition: border 0.15s;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid #f1f5f9;
+      transition: all 0.3s;
     }
-
-    .skill-item:hover {
-      border-color: #cbd5e1;
-      background: #fdfdfe;
-    }
-
-    .skill-icon {
-      font-size: 1.6rem;
-      margin-bottom: 0.7rem;
-      color: #2563eb;
-      opacity: 0.85;
-    }
-
-    .skill-name {
-      font-weight: 650;
-      font-size: 0.95rem;
-      margin-bottom: 0.35rem;
-      color: #0f172a;
-    }
-
-    .skill-desc {
-      font-size: 0.8rem;
-      color: #475569;
-      line-height: 1.5;
-    }
+    .skill-item:hover { border-color: #3b82f6; transform: translateY(-5px); }
+    .skill-icon { font-size: 1.5rem; color: #2563eb; margin-bottom: 10px; }
+    .skill-name { font-weight: 700; font-size: 1rem; margin-bottom: 5px; }
+    .skill-desc { font-size: 0.85rem; color: #64748b; }
 
     /* 页脚 */
     .footer {
       margin-top: 5rem;
-      text-align: center;
-      color: #64748b;
-      font-size: 0.95rem;
+      padding: 2rem 0;
       border-top: 1px solid #e2e8f0;
-      padding-top: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.9rem;
     }
 
-    .footer a {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 1.5rem 1rem;
-      }
-      .project-title {
-        font-size: 1.4rem;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .auxiliary-skills {
-        margin-top: 2.5rem;
-      }
-    }
-
-    .highlight {
-      color: #2563eb;
-      font-weight: 500;
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+      .intro h1 { font-size: 2.2rem; }
+      .badge { margin-left: 0; margin-top: 10px; }
+      .bio { white-space: normal; }
     }
   </style>
 </head>
 <body>
 <div class="container">
   
-  <!-- 头部：个人简介 (设计感全面升级，文字内容保持不变) -->
   <header class="intro">
     <div style="display: flex; align-items: baseline; flex-wrap: wrap;">
       <h1>主要项目作品集</h1>
       <span class="badge"><i class="fas fa-code-branch"></i> 张逸凡</span>
     </div>
-    <div class="subhead">
-      <i class="fas fa-align-left"></i> 简介 · 
-      <i class="fab fa-github"></i> 源码 · 
-      <i class="fas fa-image"></i> 展示
-    </div>
     <div class="bio">
-      <i class="fas fa-terminal"></i> 我是张逸凡，一名华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机械臂相关项目，欢迎了解。
+      <i class="fas fa-terminal"></i> 我是张逸凡，一名华南农业大学电子信息专业研二学生。以下是我读研期间独立负责的两项机械臂相关项目。
     </div>
   </header>
 
-  <!-- 项目网格 (保持不变) -->
   <section class="projects-grid">
-    
-    <!-- 项目 1 —— 全自动鼻镜 -->
     <article class="project-card" data-detail="project1-detail.html">
       <div class="image-wrapper">
-        <img 
-          src="https://s41.ax1x.com/2026/04/13/peDCstU.jpg" 
-          alt="全自动鼻镜流程预览 · 硅胶模型实验"
-          loading="lazy"
-        >
+        <img src="https://s41.ax1x.com/2026/04/13/peDCstU.jpg" alt="全自动鼻镜项目" loading="lazy">
       </div>
       <div class="card-content">
-        <div class="project-title">
-          <i class="fas fa-hospital"></i> 
-          全自动鼻镜检测与AI初筛系统
-        </div>
-        <p class="project-description">
-          <span class="highlight">简介</span> · 使用法奥意威FR5协作机器人，挂载鼻镜，完成完整鼻镜流程（Python脚本版本）。
-          注：项目尚处于中期，采集内容为硅胶模型，未进行分类检测。
-        </p>
+        <div class="project-title"><i class="fas fa-hospital"></i> 全自动鼻镜AI系统</div>
+        <p class="project-description">基于法奥协作机器人，实现从面部定位到体内腔道跟随的完整自主流程。</p>
         <div class="tech-tags">
           <span class="tech-tag">视觉伺服</span>
-          <span class="tech-tag">手眼集成</span>
-          <span class="tech-tag">自主随动</span>
+          <span class="tech-tag">ROS2</span>
+          <span class="tech-tag">人工势场</span>
         </div>
         <div class="project-links">
-          <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" rel="noopener noreferrer" class="btn-source">
-            <i class="fab fa-github"></i> 查看源码
-          </a>
-          <a href="https://pan.quark.cn/s/baddd4a8b00c" target="_blank" rel="noopener noreferrer" class="media-note video-link">
-            <i class="fas fa-play-circle"></i> 演示视频
-          </a>
+          <a href="https://github.com/2775002142/Automatic-Nasal-Endoscopy-Procedure" target="_blank" class="btn-source"><i class="fab fa-github"></i> 查看源码</a>
+          <a href="https://pan.quark.cn/s/baddd4a8b00c" target="_blank" class="media-note"><i class="fas fa-play-circle"></i> 视频演示</a>
         </div>
       </div>
     </article>
 
-    <!-- 项目 2 —— 手套控制夹取系统 -->
     <article class="project-card" data-detail="project2-detail.html">
       <div class="image-wrapper">
-        <img 
-          src="https://s41.ax1x.com/2026/04/13/peD9LwV.jpg" 
-          alt="手套简易操控 · 夹取系统"
-          loading="lazy"
-        >
+        <img src="https://s41.ax1x.com/2026/04/13/peD9LwV.jpg" alt="手套遥操作项目" loading="lazy">
       </div>
       <div class="card-content">
-        <div class="project-title">
-          <i class="fas fa-robot"></i>
-          智能手套遥操作机器人系统
-        </div>
-        <p class="project-description">
-          <span class="highlight">简介</span> · 一个由具备指尖仿生振动反馈的控制手套控制的夹取系统，使用法奥意威FR5协作机器人和自制步进电机驱动的夹爪模组构成。
-        </p>
+        <div class="project-title"><i class="fas fa-hand-paper"></i> 智能手套遥操作系统</div>
+        <p class="project-description">集成姿态感知的控制手套，配合仿生振动反馈，实现高精细度的遥操作抓取。</p>
         <div class="tech-tags">
-          <span class="tech-tag">手势遥操作</span>
-          <span class="tech-tag">多模态集成</span>
-          <span class="tech-tag">实时伺服控制</span>
+          <span class="tech-tag">主从控制</span>
+          <span class="tech-tag">仿生反馈</span>
+          <span class="tech-tag">多线程</span>
         </div>
         <div class="project-links">
-          <a href="https://github.com/2775002142/Gloves-controlling-robotic-arm" target="_blank" rel="noopener noreferrer" class="btn-source">
-            <i class="fab fa-github"></i> 查看源码
-          </a>
-          <span class="media-note">
-            <i class="fas fa-image"></i> 界面预览
-          </span>
+          <a href="https://github.com/2775002142/Gloves-controlling-robotic-arm" target="_blank" class="btn-source"><i class="fab fa-github"></i> 查看源码</a>
+          <span class="media-note"><i class="fas fa-image"></i> 界面预览</span>
         </div>
       </div>
     </article>
   </section>
 
-  <!-- 辅助能力区域 -->
   <section class="auxiliary-skills">
-    <div class="skills-title">
-      <i class="fas fa-toolbox"></i> 辅助技能与工具链
-      <span style="font-size:0.75rem; font-weight:400; color:#64748b; margin-left:0.5rem;">项目开发中实际应用</span>
-    </div>
+    <div class="skills-title"><i class="fas fa-tools"></i> 辅助技能与工具链</div>
     <div class="skills-grid">
       <div class="skill-item">
         <div class="skill-icon"><i class="fas fa-cube"></i></div>
-        <div class="skill-name">SolidWorks 建模 · 3D打印</div>
-        <div class="skill-desc">
-          能够进行简单结构设计，制作内窥镜挂载件、夹爪组装件等，并完成打印验证。
-        </div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
-        <div class="skill-name">MATLAB 优化算法复现</div>
-        <div class="skill-desc">
-          复现经典优化算法，使用23种标准测试函数进行性能对比与分析。
-        </div>
+        <div class="skill-name">SolidWorks · 3D打印</div>
+        <div class="skill-desc">负责项目内机械连接件与挂载件的结构设计与快速原型制作。</div>
       </div>
       <div class="skill-item">
         <div class="skill-icon"><i class="fas fa-brain"></i></div>
-        <div class="skill-name">ResNet-50 图像分类</div>
-        <div class="skill-desc">
-          训练基于 ResNet-50 的 CNN 模型，实现鼻腔图像三分类（鼻咽癌 / 囊肿 / 正常）。
-        </div>
+        <div class="skill-name">图像分类 · ResNet</div>
+        <div class="skill-desc">训练CNN模型实现鼻腔病理图像三分类（正常/癌/囊肿）。</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><i class="fas fa-code"></i></div>
+        <div class="skill-name">MATLAB 算法复现</div>
+        <div class="skill-desc">复现多种启发式优化算法，并完成23种基准函数测试与对比。</div>
       </div>
     </div>
   </section>
- 
-  <!-- 页脚 -->
+
   <footer class="footer">
-    <div>
-      <i class="far fa-copyright"></i> 2026 张逸凡 · 个人项目展示
-    </div>
-    <div>
-      <i class="fas fa-code"></i> 
-      <a href="#" onclick="alert('👨‍💻 所有项目均包含简介、源码链接，主要项目包含展示内容。点击卡片可查看详情页。'); return false;">
-        关于本页
-      </a> 
-      &nbsp;|&nbsp; 
-      <i class="fab fa-github"></i> 
-      <a href="https://github.com/2775002142" target="_blank">@zyf</a>
-    </div>
+    <p>© 2026 张逸凡</p>
   </footer>
 </div>
 
-<!-- 卡片跳转逻辑 -->
 <script>
-  (function() {
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-      card.addEventListener('click', function(event) {
-        const target = event.target;
-        if (target.closest('a') || target.closest('.btn-source') || target.closest('.media-note')) {
-          return;
-        }
-        const detailUrl = card.getAttribute('data-detail');
-        if (detailUrl) {
-          window.location.href = detailUrl;
-        }
-      });
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('a')) {
+        const url = card.getAttribute('data-detail');
+        if (url) window.location.href = url;
+      }
     });
-  })();
+  });
 </script>
 </body>
 </html>
